@@ -1,0 +1,72 @@
+/*REGOLE PRINCIPALI*/
+
+ 	* {
+ 	margin: 0;
+ 	padding:0;
+ 	box-sizing: border-box;
+ 	font-size: $defaultBaseFontSize;
+  font-family: $defaultFont;
+ }
+
+ /*REGOLE PRINCIPALI ---> fontSize Media Queries*/
+
+ @media all and (max-width: 1149px) {
+
+ 	* {
+ 		font-size: $tabletBaseFontSize;
+ 	}
+
+ }
+
+ @media all and (max-width: 768px) {
+
+  * {
+	 font-size: $mobileBaseFontSize;
+  }
+
+}
+
+ /*REGOLE PRINCIPALI ---> a tag*/
+
+ a, a:hover {
+   text-decoration: none;
+ }
+
+/*REGOLE PRINCIPALI ---> containers*/
+
+ #main_container {
+ 	max-width: 100vw;
+ 	height: auto;
+ 	overflow: hidden;
+ }
+
+ .container {
+   max-width: $containerDefaultWidth;
+   margin: 0 auto;
+   padding: 0 $defaultPaddingX;
+ }
+
+  /*REGOLE PRINCIPALI ---> Mixins*/
+
+ @mixin positionFixedTop {
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 1;
+ }
+
+ @mixin float($direction: 'left') {
+   @if ($direction == 'left') {
+    float: left;
+  } @else {
+    float: right;
+  }
+ }
+
+ @mixin clearfix {
+   &:after {
+     content: '';
+     display: table;
+     clear: both;
+   }
+ }
