@@ -9,17 +9,16 @@
  	<title>php-chartbool</title>
  </head>
  <body>
-   <!-- MODO 1: script nell'html, catturando l'array numerico data
-      dall'attributo data-labels nel tag canvas di chart.js. in cui
-      stampiamo in precedenza con php la versione json dell'array data.
-      Lo script poi legge e parsa il $data rendendolo utilizzabile per
+   <!-- MODO 2: script nell'html o in file separato, catturo l'array numerico data di php
+      stampandone in una stringa JS la versione json.
+      Tramite JSON.parse rendiamo leggibile come array JS per
       generare come classico il grafico
       -->
    <?php include 'data.php'; ?>
 
    <div id="main_container">
         <div class="container">
-           <canvas id="monthChart" data-sales="<?php echo $data; ?>">
+           <canvas id="monthChart">
 
            </canvas>
         </div>
@@ -33,7 +32,8 @@
   $(document).ready(function(){
 
    var monthsLabels = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre','Novembre', 'Dicembre'];
-   var monthsEarnings = JSON.parse($('#monthChart').attr('data-sales'));
+   var dataFromPhp = '<?php echo json_encode($data); ?>';
+   var monthsEarnings = JSON.parse(dataFromPhp);
    var borderColors = 'lightgreen';
    var backgroundColors = 'green';
    var options = {};
