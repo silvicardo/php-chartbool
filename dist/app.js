@@ -43132,7 +43132,30 @@ var Chart = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/cha
 
 console.log('test js');
 $(document).ready(function () {
-  console.log(Chart);
+  $.get('http://localhost/GENNAIO/php-chartbool/data.php', function (phpDataAsJson) {
+    console.log(phpDataAsJson);
+    var monthsLabels = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
+    var monthsEarnings = JSON.parse(phpDataAsJson);
+    var borderColors = 'lightgreen';
+    var backgroundColors = 'green';
+    var options = {};
+    var data = {
+      labels: monthsLabels,
+      datasets: [{
+        label: 'Sales per month',
+        data: monthsEarnings,
+        fill: true,
+        borderColor: borderColors,
+        backgroundColor: backgroundColors,
+        lineTension: 0.5
+      }]
+    };
+    var chartMesi = new Chart($('#monthChart'), {
+      type: 'line',
+      data: data,
+      options: options
+    });
+  });
 });
 
 /***/ }),
