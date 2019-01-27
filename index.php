@@ -18,7 +18,12 @@
 
    <div id="main_container">
         <div class="container">
-           <canvas id="monthChart">
+           <canvas id="monthCanvas">
+
+           </canvas>
+        </div>
+        <div class="container">
+           <canvas id="agentCanvas">
 
            </canvas>
         </div>
