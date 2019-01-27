@@ -11,24 +11,28 @@ var Chart = require('chart.js');
     //puntatori jQuery
     var monthCanvas = $('#monthCanvas');
     var agentCanvas = $('#agentCanvas');
+    var teamCanvas = $('#teamCanvas');
 
     //aggiungo titoli per grafico ad ogni oggetto del Json
     addTitlesTo(graphsJSON);
 
-    console.log(graphsJSON);
+    // console.log(graphsJSON);
 
     //CREAZIONE CHARTS
 
     //CHARTS --> MESE
-    var byMonthChart = generateGraph(graphsJSON.fatturato, monthCanvas);
+     var byMonthChart = generateGraph(graphsJSON.fatturato, monthCanvas);
 
     //CHARTS --> VENDITORE
-    var byAgentChart = generateGraph(graphsJSON.fatturato_by_agent, agentCanvas);
+     var byAgentChart = generateGraph(graphsJSON.fatturato_by_agent, agentCanvas);
+
+    //CHARTS --> VENDITORE
+    var byTeamChart = generateGraph(graphsJSON.team_efficiency, teamCanvas);
 
   });
 
   //FUNZIONI
-  
+
   function addTitlesTo(chartsJson) {
     //estraggo come array i titoli dei grafici--> ['fatturato', 'fatturato_by_agent']
     var chartsTitles = [];
@@ -52,43 +56,60 @@ var Chart = require('chart.js');
   }
 
   function setupChartDataFor(graphType, inputData) {
-    //COLORI
-    var backgroundColors = ['rgb(0,128,0)','rgb(255,0,0)', 'rgb(255,255,0)', 'rgb(238,130,238'];
-    //GESTIONE LABELS E DATA
-    var labels = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
+    //DATI STATICI
+    var months = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
+    var backgroundColors = ['rgb(0,128,0)','rgb(255,0,0)', 'rgb(238,130,238', 'rgb(255,255,0)'];
 
-    var data = inputData.data;
+    //ARRAY PER GRAFICO DA RIEMPIRE CON IL NOSTRO DB
+    var dataLabels = [];
+    var datasetsData = [];
+    var datasetsLabels = [];
 
-    if (inputData.type === 'pie') {
-      labels = [];
-      data = [];
+    //RIEMPIMENTO ARRAY PER CASISTICA
+    if (inputData.title === 'fatturato') {
+      datasetsData.push(inputData.data);
+      datasetsLabels.push(inputData.title);
+    } else {
       for (var key in inputData.data) {
-          labels.push(key);
-          data.push(inputData.data[key]);
+          datasetsLabels.push(key);
+          datasetsData.push(inputData.data[key]);
       }
     }
-    //CREAZIONE OGGETTO DATA
-    var chartData = {
-        type: inputData.type,
-        data: {
-          labels: labels,
-          datasets: [{
-             label: inputData.title,
-              data: data,
-              backgroundColor: backgroundColors,
-          }]
-        }
-    }
-    //ADATTAMENTO OGGETTO PER GRAFICO A LINEA
-     if (inputData.type === 'line') {
-       chartData.options = {};
-       chartData.data.datasets[0].borderColor = ['lightgreen'];
-       chartData.data.datasets[0].backgroundColor = ['green'];
-       chartData.data.datasets[0].linetension = 0.5;
-       chartData.data.datasets[0].fill = true;
-     }
 
-     console.log(chartData);
+    //CREAZIONE OGGETTO DATA
+    var chartData;
+    //in base al tipo di grafico()
+    if (inputData.type === 'pie') {//torta
+      chartData = {
+          type: inputData.type,
+          data: {
+            labels: datasetsLabels,
+            datasets: [{
+               label: inputData.title,
+                data: datasetsData,
+                backgroundColor: backgroundColors,
+            }],
+          }
+      };
+    } else {//linea(supporta più lineee per i team)
+      chartData = {
+          options: {},
+          type: inputData.type,
+          data: {
+            labels: months,//mesi
+            datasets: [],
+          }
+        };
+      for (var i = 0; i < datasetsLabels.length; i++) {
+        var dataset = {
+            label: (inputData.title === 'fatturato') ? inputData.title : datasetsLabels[i],
+            data: datasetsData[i],
+            borderColor: backgroundColors[i],
+            linetension: 0.5,
+        };
+        chartData.data.datasets.push(dataset);
+      }
+    }
 
     return chartData;
 

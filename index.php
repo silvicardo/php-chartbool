@@ -8,13 +8,6 @@
  	<title>php-chartbool</title>
  </head>
  <body>
-   <!-- MODO 3: script in html o file separato,
-      l'array numerico data di php viene codificato come JSON e
-      stampato alla fine del file data.php.
-      Tramite chiamata Ajax all'url di data.php ottengo come response
-      il JSON preparatomi da Php e con JSON.parse rendiamo leggibile come array JS per
-      generare come classico il grafico
-      -->
 
    <div id="main_container">
         <div class="container">
@@ -24,6 +17,11 @@
         </div>
         <div class="container">
            <canvas id="agentCanvas">
+
+           </canvas>
+        </div>
+        <div class="container">
+           <canvas id="teamCanvas">
 
            </canvas>
         </div>
