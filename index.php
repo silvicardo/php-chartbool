@@ -8,19 +8,19 @@
  	<title>php-chartbool</title>
  </head>
  <body>
-
-   <div id="main_container">
-        <div class="container">
+   <?php include 'data.php'; ?>
+   <div id="main_container" class="<?php echo $_GET['level']; ?>">
+        <div class="container <?php echo $graphs['fatturato']['access']; ?>">
            <canvas id="monthCanvas">
 
            </canvas>
         </div>
-        <div class="container">
+        <div class="container <?php echo $graphs['fatturato_by_agent']['access']; ?>">
            <canvas id="agentCanvas">
 
            </canvas>
         </div>
-        <div class="container">
+        <div class="container <?php echo $graphs['team_efficiency']['access']; ?>">
            <canvas id="teamCanvas">
 
            </canvas>

@@ -27,6 +27,4 @@ $graphs = [
    ],
  ];
 
-
-echo json_encode($graphs);
 ?>

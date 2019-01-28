@@ -43132,7 +43132,7 @@ var Chart = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/cha
 
 console.log('test js');
 $(document).ready(function () {
-  $.getJSON('http://localhost/GENNAIO/php-chartbool/data.php', function (graphsJSON) {
+  $.getJSON('http://localhost/GENNAIO/php-chartbool/getRoute.php', function (graphsJSON) {
     //puntatori jQuery
     var monthCanvas = $('#monthCanvas');
     var agentCanvas = $('#agentCanvas');
@@ -43172,11 +43172,13 @@ $(document).ready(function () {
   }
 
   function setupChartDataFor(graphType, inputData) {
+    //DATI STATICI
     var months = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
-    var backgroundColors = ['rgb(0,128,0)', 'rgb(255,0,0)', 'rgb(238,130,238', 'rgb(255,255,0)'];
+    var backgroundColors = ['rgb(0,128,0)', 'rgb(255,0,0)', 'rgb(238,130,238', 'rgb(255,255,0)']; //ARRAY PER GRAFICO DA RIEMPIRE CON IL NOSTRO DB
+
     var dataLabels = [];
     var datasetsData = [];
-    var datasetsLabels = [];
+    var datasetsLabels = []; //RIEMPIMENTO ARRAY PER CASISTICA
 
     if (inputData.title === 'fatturato') {
       datasetsData.push(inputData.data);
@@ -43186,13 +43188,12 @@ $(document).ready(function () {
         datasetsLabels.push(key);
         datasetsData.push(inputData.data[key]);
       }
-    } // console.log(inputData.data);
-    //CREAZIONE OGGETTO DATA
+    } //CREAZIONE OGGETTO DATA
 
 
-    var chartData;
+    var chartData; //in base al tipo di grafico()
 
-    if (inputData.title === 'fatturato_by_agent') {
+    if (inputData.type === 'pie') {
       //torta
       chartData = {
         type: inputData.type,
@@ -43205,48 +43206,28 @@ $(document).ready(function () {
           }]
         }
       };
-    } else //  if (inputData.title === 'fatturato') { //linea
-      //
-      //   chartData = {
-      //       options: {},
-      //       type: inputData.type,
-      //       data: {
-      //         labels: months,//mesi
-      //         datasets: [],
-      //       }
-      //     };
-      //     var dataset = {
-      //         label: inputData.title,
-      //         data: datasetsData,
-      //         backgroundColor: backgroundColors[0],
-      //         borderColor: backgroundColors[0],
-      //         linetension: 0.5,
-      //     };
-      //     chartData.data.datasets.push(dataset);
-      // } else  if (inputData.title === 'team_efficiency')
-      {
-        //linea
-        chartData = {
-          options: {},
-          type: inputData.type,
-          data: {
-            labels: months,
-            //mesi
-            datasets: []
-          }
-        };
-        console.log(datasetsLabels);
-
-        for (var i = 0; i < datasetsLabels.length; i++) {
-          var dataset = {
-            label: inputData.title === 'fatturato' ? inputData.title : datasetsLabels[i],
-            data: datasetsData[i],
-            borderColor: backgroundColors[i],
-            linetension: 0.5
-          };
-          chartData.data.datasets.push(dataset);
+    } else {
+      //linea(supporta più lineee per i team)
+      chartData = {
+        options: {},
+        type: inputData.type,
+        data: {
+          labels: months,
+          //mesi
+          datasets: []
         }
+      };
+
+      for (var i = 0; i < datasetsLabels.length; i++) {
+        var dataset = {
+          label: inputData.title === 'fatturato' ? inputData.title : datasetsLabels[i],
+          data: datasetsData[i],
+          borderColor: backgroundColors[i],
+          linetension: 0.5
+        };
+        chartData.data.datasets.push(dataset);
       }
+    }
 
     return chartData;
   }

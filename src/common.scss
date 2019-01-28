@@ -34,16 +34,30 @@
 
 /*REGOLE PRINCIPALI ---> containers*/
 
+%containerBaseRules {
+  display: block;
+  max-width: $containerDefaultWidth;
+  margin: 0 auto;
+  padding: 0 $defaultPaddingX;
+}
+
  #main_container {
  	max-width: 100vw;
  	height: auto;
  	overflow: hidden;
- }
-
- .container {
-   max-width: $containerDefaultWidth;
-   margin: 0 auto;
-   padding: 0 $defaultPaddingX;
+  .container {
+    @extend %containerBaseRules;
+  }
+  &.guest {
+    .container.employee, .container.clevel {
+      display: none;
+    }
+  }
+  &.employee {
+    .container.clevel {
+      display: none;
+    }
+  }
  }
 
   /*REGOLE PRINCIPALI ---> Mixins*/

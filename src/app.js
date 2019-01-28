@@ -6,7 +6,7 @@ var Chart = require('chart.js');
 
  $(document).ready(function () {
 
-   $.getJSON('http://localhost/GENNAIO/php-chartbool/data.php',function (graphsJSON) {
+   $.getJSON('http://localhost/GENNAIO/php-chartbool/getRoute.php',function (graphsJSON) {
 
     //puntatori jQuery
     var monthCanvas = $('#monthCanvas');

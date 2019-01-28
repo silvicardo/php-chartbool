@@ -31,16 +31,26 @@ a:hover {
 
 /*REGOLE PRINCIPALI ---> containers*/
 
+#main_container .container {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
 #main_container {
   max-width: 100vw;
   height: auto;
   overflow: hidden;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
+#main_container.guest .container.employee,
+#main_container.guest .container.clevel {
+  display: none;
+}
+
+#main_container.employee .container.clevel {
+  display: none;
 }
 
 /*REGOLE PRINCIPALI ---> Mixins*/
