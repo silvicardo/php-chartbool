@@ -1,0 +1,10 @@
+
+.charts {
+  margin-top: $navbarHeight + $chartsElementsYspacing;
+  padding-bottom: $chartsElementsYspacing;
+  h2 {
+    font-size: $biggerFontSize;
+    text-transform: $chartsH2TextTransform;
+    margin-bottom: 40px;
+  }
+}

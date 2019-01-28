@@ -43143,7 +43143,7 @@ $(document).ready(function () {
 
     var byMonthChart = generateGraph(graphsJSON.fatturato, monthCanvas); //CHARTS --> VENDITORE
 
-    var byAgentChart = generateGraph(graphsJSON.fatturato_by_agent, agentCanvas); //CHARTS --> VENDITORE
+    var byAgentChart = generateGraph(graphsJSON.fatturato_by_agent, agentCanvas); //CHARTS --> TEAM
 
     var byTeamChart = generateGraph(graphsJSON.team_efficiency, teamCanvas);
   }); //FUNZIONI

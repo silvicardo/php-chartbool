@@ -1,6 +1,5 @@
 //CONTAINER
-$defaultPaddingX: 15px;
-$containerDefaultWidth: 1200px;
+$defaultPadding: 25px;
 
 //TEXT
 $defaultFont: 'Open Sans', sans-serif;
@@ -13,5 +12,17 @@ $regularBaseFontSize: 1rem;
 $smallerFontSize: 0.8rem;
 $extraSmallFontSize: 0.6rem;
 $biggerFontSize: 1.3rem;
+$xlFontSize: 1.6rem;
+$doubleRemFontSize: 2rem;
 
 $bolderFont: 600;
+$boldestFont: 800;
+
+//NAVBAR
+$navbarHeight: 100px;
+$navbarBGcolor: blue;
+$navbatH1TextTransform: uppercase;
+
+//CHARTS
+$chartsElementsYspacing: 100px;
+$chartsH2TextTransform: uppercase;//chartTitle

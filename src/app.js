@@ -24,7 +24,7 @@ $(document).ready(function () {
     //CHARTS --> VENDITORE
      var byAgentChart = generateGraph(graphsJSON.fatturato_by_agent, agentCanvas);
 
-    //CHARTS --> VENDITORE
+    //CHARTS --> TEAM
     var byTeamChart = generateGraph(graphsJSON.team_efficiency, teamCanvas);
 
   });

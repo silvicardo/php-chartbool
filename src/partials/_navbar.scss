@@ -1,0 +1,19 @@
+
+nav {
+  @include positionFixedTop;
+  height: $navbarHeight;
+  width: 100%;
+  background: $navbarBGcolor;
+  text-align: center;
+  line-height: $navbarHeight;
+  h1 {
+    font-size: $doubleRemFontSize;
+    font-weight: $boldestFont;
+    text-transform: $navbatH1TextTransform;
+    color: white;
+    i {
+      font-size: $xlFontSize;
+      padding: 0px 10px;
+    }
+  }
+}
