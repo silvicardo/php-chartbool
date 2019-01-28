@@ -2,16 +2,14 @@
 var $ = require('jquery');
 var Chart = require('chart.js');
 
- console.log('test js');
-
- $(document).ready(function () {
+$(document).ready(function () {
 
    $.getJSON('http://localhost/GENNAIO/php-chartbool/getRoute.php',function (graphsJSON) {
 
     //puntatori jQuery
-    var monthCanvas = $('#monthCanvas');
-    var agentCanvas = $('#agentCanvas');
-    var teamCanvas = $('#teamCanvas');
+    var monthCanvas = $('#fatturato');
+    var agentCanvas = $('#fatturato_by_agent');
+    var teamCanvas = $('#team_efficiency');
 
     //aggiungo titoli per grafico ad ogni oggetto del Json
     addTitlesTo(graphsJSON);

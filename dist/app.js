@@ -43130,13 +43130,12 @@ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"
 
 var Chart = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
 
-console.log('test js');
 $(document).ready(function () {
   $.getJSON('http://localhost/GENNAIO/php-chartbool/getRoute.php', function (graphsJSON) {
     //puntatori jQuery
-    var monthCanvas = $('#monthCanvas');
-    var agentCanvas = $('#agentCanvas');
-    var teamCanvas = $('#teamCanvas'); //aggiungo titoli per grafico ad ogni oggetto del Json
+    var monthCanvas = $('#fatturato');
+    var agentCanvas = $('#fatturato_by_agent');
+    var teamCanvas = $('#team_efficiency'); //aggiungo titoli per grafico ad ogni oggetto del Json
 
     addTitlesTo(graphsJSON); // console.log(graphsJSON);
     //CREAZIONE CHARTS
