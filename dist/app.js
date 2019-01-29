@@ -43132,37 +43132,21 @@ var Chart = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/cha
 
 $(document).ready(function () {
   $.getJSON('http://localhost/GENNAIO/php-chartbool/getRoute.php', function (graphsJSON) {
-    //puntatori jQuery
-    var monthCanvas = $('#fatturato');
-    var agentCanvas = $('#fatturato_by_agent');
-    var teamCanvas = $('#team_efficiency'); //aggiungo titoli per grafico ad ogni oggetto del Json
-
-    addTitlesTo(graphsJSON); // console.log(graphsJSON);
     //CREAZIONE CHARTS
-    //CHARTS --> MESE
-
-    var byMonthChart = generateGraph(graphsJSON.fatturato, monthCanvas); //CHARTS --> VENDITORE
-
-    var byAgentChart = generateGraph(graphsJSON.fatturato_by_agent, agentCanvas); //CHARTS --> TEAM
-
-    var byTeamChart = generateGraph(graphsJSON.team_efficiency, teamCanvas);
+    generateGraphsFrom(graphsJSON);
   }); //FUNZIONI
 
-  function addTitlesTo(chartsJson) {
-    //estraggo come array i titoli dei grafici--> ['fatturato', 'fatturato_by_agent']
-    var chartsTitles = [];
-
-    for (var key in chartsJson) {
-      chartsTitles.push(key);
-    } //li aggiungo come proprietà title al rispettivo
-    //oggetto del JSON input
-
-
-    for (var i = 0; i < chartsTitles.length; i++) {
-      chartsJson[chartsTitles[i]].title = chartsTitles[i];
+  function generateGraphsFrom(chartsJson) {
+    //Sfruttando la chiave dell'oggetto ad
+    //ogni proprietà del JSON
+    //1. aggiungiamo la proprietà title ad ogni oggetto
+    //2. passiamo a generateGraph
+    //-> l'oggetto contenente i dati del grafico completo di titolo
+    //-> il puntatore jQuery (corrispondente all'id + il titolo)
+    for (var chartName in chartsJson) {
+      chartsJson[chartName].title = chartName;
+      generateGraph(chartsJson[chartName], $('#' + chartsJson[chartName].title));
     }
-
-    return chartsJson;
   }
 
   function generateGraph(data, canvas) {
